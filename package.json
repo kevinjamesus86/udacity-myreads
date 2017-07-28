@@ -1,4 +1,9 @@
 {
+  "name": "udacity-myreads",
+  "version": "1.0.0",
+  "description": "Udacity reactnd my-reads project",
+  "author": "Kevin James <kevinjamesus86@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "node-sass-chokidar": "^0.0.3",
     "normalize.css": "^7.0.0",
@@ -20,11 +25,5 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "name": "udacity-myreads",
-  "version": "1.0.0",
-  "description": "Udacity reactnd my-reads project",
-  "main": "''",
-  "author": "Kevin James <kevinjamesus86@gmail.com>",
-  "license": "MIT"
+  }
 }
