@@ -1,0 +1,37 @@
+@import '../node_modules/normalize.css/normalize.css';
+
+@viewport {
+  width: device-width;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  min-width: 320px;
+  box-sizing: border-box;
+}
+
+body {
+  color: #464c50;
+  font: 400 1rem/1.6 "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-overflow-scrolling: touch;
+  cursor: default;
+}
+
+body,
+button,
+input,
+textarea {
+  -webkit-font-smoothing: antialiased;
+}

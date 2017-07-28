@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "node-sass-chokidar": "^0.0.3",
+    "normalize.css": "^7.0.0",
+    "npm-run-all": "^4.0.2",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.10"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "build-js": "react-scripts build",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "name": "udacity-myreads",
+  "version": "1.0.0",
+  "description": "Udacity reactnd my-reads project",
+  "main": "''",
+  "author": "Kevin James <kevinjamesus86@gmail.com>",
+  "license": "MIT"
+}

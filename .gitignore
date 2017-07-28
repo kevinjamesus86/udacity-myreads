@@ -1,0 +1,5 @@
+.DS_Store
+yarn.lock
+build/
+node_modules/
+src/**/*.css
