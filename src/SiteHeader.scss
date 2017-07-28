@@ -15,7 +15,20 @@
 
   &__link {
     color: #464c50;
+    display: inline-block;
     text-decoration: none;
+    position: relative;
+
+    // Expand the tap target area without
+    // changing the dimensions of the link
+    &::after {
+      content: "";
+      top: -0.5rem;
+      right: -0.5rem;
+      bottom: -0.5rem;
+      left: -0.5rem;
+      position: absolute;
+    }
 
     &:hover,
     &:focus {
