@@ -1,0 +1,15 @@
+.bookshelf {
+  margin: auto;
+  max-width: 90vw;
+
+  &__shelf {
+    margin: 5rem 0;
+  }
+
+  &__heading {
+    color: #111;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 0 0 2rem 0;
+  }
+}
