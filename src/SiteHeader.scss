@@ -1,0 +1,39 @@
+.site-header {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  background-color: #f9f9fa;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08);
+
+  &__logo {
+    margin: 0 3rem 0 0;
+    font-size: 20px;
+  }
+}
+
+.site-links {
+
+  &__link {
+    color: #464c50;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: darken(#464c50, 20%);
+    }
+  }
+
+  &__link-divider {
+    margin: 0 1rem;
+
+    &::after {
+      color: lighten(#464c50, 50%);
+      content: "/";
+      font-size: 12px;
+    }
+  }
+
+  &__link.active {
+    color: #c0392b;
+  }
+}
