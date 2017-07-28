@@ -1,23 +1,45 @@
-.site-header {
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  background-color: #f9f9fa;
-  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08);
+.header {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #ec356e, #ce3276, #7131a7);
+  box-shadow: 0 15px 45px rgba(50, 50, 93, 0.15),
+              0 5px 15px rgba(0, 0, 0, 0.07);
+
+  &-inner {
+    margin: auto;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+  }
 
   &__logo {
-    margin: 0 3rem 0 0;
-    font-size: 20px;
+    margin: 0;
+    color: #fff;
+    font-size: 1.7rem;
+    transform: translateY(-2px);
+
+    &::before {
+      content: "[";
+      font-weight: 400;
+      display: inline-block;
+    }
+
+    &::after {
+      content: "]";
+      font-weight: 400;
+      display: inline-block;
+    }
   }
 }
 
 .site-links {
+  margin-left: 3rem;
 
   &__link {
-    color: #464c50;
+    color: #fff;
     display: inline-block;
     text-decoration: none;
     position: relative;
+    border-bottom: 1px solid transparent;
 
     // Expand the tap target area without
     // changing the dimensions of the link
@@ -30,23 +52,23 @@
       position: absolute;
     }
 
-    &:hover,
-    &:focus {
-      color: darken(#464c50, 20%);
+    &:focus,
+    &:hover {
+      color: #eee;
     }
   }
 
   &__link-divider {
-    margin: 0 1rem;
+    margin: 0 1.5rem;
 
     &::after {
-      color: lighten(#464c50, 50%);
       content: "/";
       font-size: 12px;
+      color: rgba(255,255,255,0.33);
     }
   }
 
   &__link.active {
-    color: #c0392b;
+    border-bottom-color: rgba(255, 255, 255, 0.66);
   }
 }
