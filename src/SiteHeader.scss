@@ -108,6 +108,11 @@
   display: block;
   transition: box-shadow 0.2s ease;
 
+  &::selection {
+    color: #464c50;
+    background-color: #fff;
+  }
+
   &::placeholder {
     color: rgba(255, 255, 255, 0.66);
   }
