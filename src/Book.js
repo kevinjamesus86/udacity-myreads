@@ -21,8 +21,8 @@ export default class Book extends Component {
         <h3 className="book__title">
           {book.title}
         </h3>
-        <p className="book__subtitle" hidden={!book.subtitle}>
-          {book.subtitle}
+        <p className="book__authors" hidden={!book.authors}>
+          {book.authors && book.authors.join(', ')}
         </p>
       </div>
     );
