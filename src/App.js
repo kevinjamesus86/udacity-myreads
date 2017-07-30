@@ -38,12 +38,21 @@ class BooksApp extends Component {
     BooksAPI.update(book, shelf).then(() => {
       const books = this.state.books.slice(0);
       const bookIndex = books.findIndex(b => b.id === book.id);
-      book.shelf = shelf;
+      const originalBook = book;
+
+      // If we have this on a shelf grab it, otherwise
+      // we're working with a new book.
+      book = ~bookIndex ? books[bookIndex] : book;
+      originalBook.shelf = book.shelf = shelf;
+
+      // Removing a a shelved book
       if (shelf === 'none' && ~bookIndex) {
         books.splice(bookIndex, 1);
       } else if (bookIndex === -1) {
+        // Adding a new book
         books.push(book);
       }
+
       this.setBooks(books);
     });
   };
