@@ -18,6 +18,9 @@ export default class SiteHeader extends Component {
         this.header.classList.toggle('smoosh',
           window.scrollY >= 50);
       });
+    }, {
+      capture: false,
+      passive: true,
     });
   }
   render() {
