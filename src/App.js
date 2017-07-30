@@ -45,7 +45,7 @@ class BooksApp extends Component {
       book = ~bookIndex ? books[bookIndex] : book;
       originalBook.shelf = book.shelf = shelf;
 
-      // Removing a a shelved book
+      // Removing a shelved book
       if (shelf === 'none' && ~bookIndex) {
         books.splice(bookIndex, 1);
       } else if (bookIndex === -1) {
