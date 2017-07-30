@@ -17,21 +17,18 @@ export default class SiteHeader extends Component {
             </NavLink>
             <span className="site-links__link-divider"></span>
             <NavLink
-              exact
               to="/reading"
               className="site-links__link">
               reading
             </NavLink>
             <span className="site-links__link-divider"></span>
             <NavLink
-              exact
               to="/want-to-read"
               className="site-links__link">
               want to read
             </NavLink>
             <span className="site-links__link-divider"></span>
             <NavLink
-              exact
               to="/read"
               className="site-links__link">
               read
