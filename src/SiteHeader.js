@@ -30,14 +30,9 @@ export default class SiteHeader extends Component {
           <h1 className="header__logo">my reads</h1>
           <nav className="site-links">
             <NavLink
-              className="site-links__link"
               exact
-              to={{
-                pathname: '/',
-                state: {
-                  shelf: ''
-                }
-              }}>
+              to="/"
+              className="site-links__link">
               all
             </NavLink>
             <span className="site-links__link-divider"></span>
