@@ -19,34 +19,40 @@ export default class BookShelf extends Component {
       wantToRead: [],
       read: [],
     });
+
+    function listBooksOrElse(books, message) {
+      return books.length ?
+        <ListBooks
+          books={books}
+          onUpdateBook={onUpdateBook}
+        /> :
+        <div className="bookshelf-alt">
+          {message}
+        </div>;
+    }
+
     return (
       <section className="bookshelf">
         <section className="bookshelf__shelf">
           <h2 className="bookshelf__heading">
             Reading
           </h2>
-          <ListBooks
-            books={booksByShelf.currentlyReading}
-            onUpdateBook={onUpdateBook}
-          />
+          {listBooksOrElse(booksByShelf.currentlyReading,
+            'Go find a book')}
         </section>
         <section className="bookshelf__shelf">
           <h2 className="bookshelf__heading">
             Want to read
           </h2>
-          <ListBooks
-            books={booksByShelf.wantToRead}
-            onUpdateBook={onUpdateBook}
-          />
+          {listBooksOrElse(booksByShelf.wantToRead,
+            'Really? nothing?')}
         </section>
         <section className="bookshelf__shelf">
           <h2 className="bookshelf__heading">
             Read
           </h2>
-          <ListBooks
-            books={booksByShelf.read}
-            onUpdateBook={onUpdateBook}
-          />
+          {listBooksOrElse(booksByShelf.read,
+            'Come on now..')}
         </section>
       </section>
     );

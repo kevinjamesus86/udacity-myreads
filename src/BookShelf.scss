@@ -2,6 +2,20 @@
   margin: auto;
   max-width: 92vw;
 
+  &-alt {
+    color: #88989a;
+    font-size: 0.9rem;
+    text-align: center;
+
+    &::before {
+      content: "[ ";
+    }
+
+    &::after {
+      content: " ]";
+    }
+  }
+
   &__shelf {
     margin: 5rem 0;
   }
