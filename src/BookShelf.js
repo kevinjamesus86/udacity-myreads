@@ -30,7 +30,7 @@ export default class BookShelf extends Component {
         </section>
         <section className="bookshelf__shelf">
           <h2 className="bookshelf__heading">
-            Will Read
+            Want to read
           </h2>
           <ListBooks
             books={booksByShelf.wantToRead}
