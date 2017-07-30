@@ -7,9 +7,10 @@ import ListBooks from './ListBooks';
 export default class BookShelf extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
+    onUpdateBook: PropTypes.func.isRequired,
   };
   render() {
-    const { books } = this.props;
+    const { books, onUpdateBook } = this.props;
     const booksByShelf = books.reduce((byShelf, book) => {
       byShelf[book.shelf].push(book);
       return byShelf;
@@ -26,6 +27,7 @@ export default class BookShelf extends Component {
           </h2>
           <ListBooks
             books={booksByShelf.currentlyReading}
+            onUpdateBook={onUpdateBook}
           />
         </section>
         <section className="bookshelf__shelf">
@@ -34,6 +36,7 @@ export default class BookShelf extends Component {
           </h2>
           <ListBooks
             books={booksByShelf.wantToRead}
+            onUpdateBook={onUpdateBook}
           />
         </section>
         <section className="bookshelf__shelf">
@@ -42,6 +45,7 @@ export default class BookShelf extends Component {
           </h2>
           <ListBooks
             books={booksByShelf.read}
+            onUpdateBook={onUpdateBook}
           />
         </section>
       </section>

@@ -7,14 +7,18 @@ import Book from './Book';
 export default class ListBooks extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
+    onUpdateBook: PropTypes.func.isRequired,
   };
   render() {
-    const { books } = this.props;
+    const { books, onUpdateBook } = this.props;
     return (
       <ul className="list-books">
-        {books.map(book =>
-          <li key={book.id} className="list-books__item">
-            <Book book={book} />
+        {books.map((book, index) =>
+          <li key={`${book.id}.${index}`} className="list-books__item">
+            <Book
+              book={book}
+              onChange={onUpdateBook}
+            />
           </li>
         )}
       </ul>

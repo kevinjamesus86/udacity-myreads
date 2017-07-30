@@ -7,9 +7,10 @@ export default class ListSearchBooks extends Component {
   static propTypes = {
     query: PropTypes.string.isRequired,
     books: PropTypes.array.isRequired,
+    onUpdateBook: PropTypes.func.isRequired,
   };
   render() {
-    const { query, books } = this.props;
+    const { query, books, onUpdateBook } = this.props;
 
     let searchForContent;
     if (query) {
@@ -38,6 +39,7 @@ export default class ListSearchBooks extends Component {
         </div>
         <ListBooks
           books={books}
+          onUpdateBook={onUpdateBook}
         />
       </section>
     );

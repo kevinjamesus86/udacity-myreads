@@ -15,15 +15,17 @@ class BooksApp extends Component {
   };
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      this.setState(state => ({ books }));
+      this.setBooks(books);
     });
   }
   searchBooks = query => {
     this.setState({ query });
     if (query) {
       BooksAPI.search(query, 20).then(books => {
+        books = books.error ? [] : books;
+        this.updateShelvesToMatchOwnBooks(books);
         this.setState({
-          searchBooks: books.error ? [] : books,
+          searchBooks: books,
         });
       });
     } else {
@@ -31,6 +33,30 @@ class BooksApp extends Component {
         searchBooks: []
       });
     }
+  };
+  onUpdateBook = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      const books = this.state.books.slice(0);
+      const bookIndex = books.indexOf(book);
+      book.shelf = shelf;
+      if (shelf === 'none' && ~bookIndex) {
+        books.splice(bookIndex, 1);
+      } else if (bookIndex === -1) {
+        books.push(book);
+      }
+      this.setBooks(books);
+    });
+  };
+  setBooks = books => {
+    this.bookIdsToShelves = Object.create(null);
+    books.forEach(({id, shelf}) => this.bookIdsToShelves[id] = shelf);
+    this.setState({ books });
+  };
+  updateShelvesToMatchOwnBooks = books => {
+    books.forEach(book => {
+      book.shelf = book.id in this.bookIdsToShelves ?
+        this.bookIdsToShelves[book.id] : 'none';
+    });
   };
   render() {
     const { books, searchBooks } = this.state;
@@ -45,6 +71,7 @@ class BooksApp extends Component {
           render={() =>
             <BookShelf
               books={books}
+              onUpdateBook={this.onUpdateBook}
             />
           }
         />
@@ -54,6 +81,7 @@ class BooksApp extends Component {
             <ListSearchBooks
               books={searchBooks}
               query={this.state.query}
+              onUpdateBook={this.onUpdateBook}
             />
           }
         />
