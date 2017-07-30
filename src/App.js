@@ -48,14 +48,13 @@ class BooksApp extends Component {
     });
   };
   setBooks = books => {
-    this.bookIdsToShelves = Object.create(null);
-    books.forEach(({id, shelf}) => this.bookIdsToShelves[id] = shelf);
+    const entries = books.map(book => [book.id, book.shelf]);
+    this.bookIdsToShelves = new Map(entries);
     this.setState({ books });
   };
   updateShelvesToMatchOwnBooks = books => {
     books.forEach(book => {
-      book.shelf = book.id in this.bookIdsToShelves ?
-        this.bookIdsToShelves[book.id] : 'none';
+      book.shelf = this.bookIdsToShelves.get(book.id) || 'none';
     });
   };
   groupBooksForBookshelf = (books, filter) => {
