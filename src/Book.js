@@ -6,6 +6,10 @@ import './Book.css';
 export default class Book extends Component {
   static propTypes = {
     book: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+  };
+  handleChange = event => {
+    this.props.onChange(this.props.book, event.target.value);
   };
   render() {
     const { book } = this.props;
@@ -26,6 +30,15 @@ export default class Book extends Component {
         <p className="book__authors" hidden={!book.authors}>
           {book.authors && book.authors.join(', ')}
         </p>
+        <div className="book__action">
+          <select value={book.shelf} onChange={this.handleChange}>
+            <option disabled>Move to...</option>
+            <option value="currentlyReading">Reading</option>
+            <option value="wantToRead">Want to read</option>
+            <option value="read">Read</option>
+            <option value="none">None</option>
+          </select>
+        </div>
       </div>
     );
   }

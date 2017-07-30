@@ -1,6 +1,14 @@
 .book {
   width: 140px;
+  padding: 1rem 1rem 3rem;
   line-height: 1.3;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1),
+              0 5px 15px rgba(0, 0, 0, 0.07);
+  background-clip: padding-box;
+  position: relative;
+  overflow: hidden;
 
   &__image-container {
     height: 175px;
@@ -25,5 +33,33 @@
     margin: 0;
     color: #88989a;
     font-size: 0.9rem;
+  }
+
+  &__action {
+    background: linear-gradient(135deg, #ec356e, #ce3276, #7131a7);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    select {
+      width: 100%;
+      height: 2rem;
+      margin: 0;
+      padding: 0 1rem;
+      color: #fff;
+      border-radius: 0;
+      border: none;
+      outline: none;
+      appearance: none;
+      background: transparent url('./icons/arrow-down.svg') 92% 50% no-repeat;
+      display: block;
+
+      // 1. Firefox hack, setting the select's color
+      //    to white also makes the option text white
+      option {
+        color: #111; // 1
+      }
+    }
   }
 }
