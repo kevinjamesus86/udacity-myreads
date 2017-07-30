@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, NavLink } from 'react-router-dom';
 import './SiteHeader.css';
 
 export default class SiteHeader extends Component {
+  static propTypes = {
+    onQueryChange: PropTypes.func.isRequired,
+  };
+  handleQueryChange = event => {
+    this.props.onQueryChange(event.target.value);
+  };
   render() {
     return (
       <header className="header">
@@ -34,6 +41,16 @@ export default class SiteHeader extends Component {
               read
             </NavLink>
           </nav>
+          <Link
+            to="/search"
+            className="search-container">
+            <input
+              type="search"
+              className="search-input"
+              placeholder="Search for books"
+              onChange={this.handleQueryChange}
+            />
+          </Link>
         </div>
       </header>
     );

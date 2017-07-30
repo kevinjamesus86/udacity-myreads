@@ -32,7 +32,7 @@
 }
 
 .site-links {
-  margin-left: 3rem;
+  margin: 0 3rem;
 
   &__link {
     color: #fff;
@@ -54,7 +54,7 @@
 
     &:focus,
     &:hover {
-      color: #eee;
+      border-bottom-color: rgba(255, 255, 255, 0.33);
     }
   }
 
@@ -64,11 +64,45 @@
     &::after {
       content: "/";
       font-size: 12px;
-      color: rgba(255,255,255,0.33);
+      color: rgba(255, 255, 255, 0.33);
     }
   }
 
   &__link.active {
     border-bottom-color: rgba(255, 255, 255, 0.66);
+  }
+}
+
+.search-container,
+.search-input {
+  &,
+  &:focus {
+    outline: none;
+  }
+}
+
+.search-container {
+  text-decoration: none;
+  display: flex;
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  border: 0 none;
+  display: block;
+  transition: box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.66);
+  }
+
+  &:focus {
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1),
+                0 5px 15px rgba(0, 0, 0, 0.07);
   }
 }
