@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import ListBooks from './ListBooks';
-import './SearchBooks.css';
+import './ListSearchBooks.css';
 
-export default class SearchBooks extends Component {
+export default class ListSearchBooks extends Component {
   static propTypes = {
     query: PropTypes.string
   };
@@ -57,8 +57,8 @@ export default class SearchBooks extends Component {
     }
 
     return (
-      <section className="search-books">
-        <div className="search-for">
+      <section className="list-search-books">
+        <div className="list-search-books__heading">
           {searchForContent}
         </div>
         <ListBooks

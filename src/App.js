@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import SiteHeader from './SiteHeader';
 import BookShelf from './BookShelf';
-import SearchBooks from './SearchBooks';
+import ListSearchBooks from './ListSearchBooks';
 import * as BooksAPI from './BooksAPI';
 
 class BooksApp extends Component {
@@ -37,7 +37,7 @@ class BooksApp extends Component {
         <Route
           path='/search'
           render={() =>
-            <SearchBooks
+            <ListSearchBooks
               query={this.state.query}
             />
           }
