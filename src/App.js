@@ -58,6 +58,38 @@ class BooksApp extends Component {
         this.bookIdsToShelves[book.id] : 'none';
     });
   };
+  groupBooksForBookshelf = (books, filter) => {
+    const booksByShelf = books.reduce((byShelf, book) => {
+      byShelf[book.shelf].push(book);
+      return byShelf;
+    }, {
+      currentlyReading: [],
+      wantToRead: [],
+      read: [],
+    });
+
+    const shelves = [{
+      label: 'Reading',
+      books: booksByShelf.currentlyReading,
+      sansBooksMessage: 'Go find a book'
+    }, {
+      label: 'Want to read',
+      books: booksByShelf.wantToRead,
+      sansBooksMessage: 'Really? Nothing?'
+    }, {
+      label: 'Read',
+      books: booksByShelf.read,
+      sansBooksMessage: 'Come on now...'
+    }];
+
+    return filter ?
+      shelves.splice({
+        currentlyReading: 0,
+        wantToRead: 1,
+        read: 2,
+      }[filter], 1) :
+      shelves;
+  };
   render() {
     const { books, searchBooks } = this.state;
 
@@ -72,7 +104,7 @@ class BooksApp extends Component {
             path='/'
             render={() =>
               <BookShelf
-                books={books}
+                shelves={this.groupBooksForBookshelf(books)}
                 onUpdateBook={this.onUpdateBook}
               />
             }
@@ -89,12 +121,12 @@ class BooksApp extends Component {
           />
           <Route
             path='/:shelf'
-            render={({ location }) => {
-              const filteredBooks = books.filter(book =>
-                book.shelf === location.state.shelf);
+            render={route => {
+              const shelves = this.groupBooksForBookshelf(books,
+                route.location.state.shelf);
               return (
                 <BookShelf
-                  books={filteredBooks}
+                  shelves={shelves}
                   onUpdateBook={this.onUpdateBook}
                 />
               );
