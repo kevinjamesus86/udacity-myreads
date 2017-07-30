@@ -10,9 +10,19 @@ export default class SiteHeader extends Component {
   handleQueryChange = event => {
     this.props.onQueryChange(event.target.value);
   };
+  componentDidMount() {
+    let frame;
+    window.addEventListener('scroll', () => {
+      frame = frame || window.requestAnimationFrame(() => {
+        frame = null;
+        this.header.classList.toggle('smoosh',
+          window.scrollY >= 50);
+      });
+    });
+  }
   render() {
     return (
-      <header className="header">
+      <header ref={el => this.header = el} className="header">
         <div className="header-inner">
           <h1 className="header__logo">my reads</h1>
           <nav className="site-links">
