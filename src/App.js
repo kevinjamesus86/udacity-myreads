@@ -9,18 +9,24 @@ import * as BooksAPI from './BooksAPI';
 
 class BooksApp extends Component {
   state = {
-    books: []
+    books: [],
+    query: '',
   };
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState(state => ({ books }));
     });
   }
+  handleQueryChange = query => {
+    this.setState({ query });
+  };
   render() {
     const { books } = this.state;
     return (
       <main className="app">
-        <SiteHeader />
+        <SiteHeader
+          onQueryChange={this.handleQueryChange}
+        />
         <Route
           exact
           path='/'
@@ -30,7 +36,11 @@ class BooksApp extends Component {
         />
         <Route
           path='/search'
-          component={SearchBooks}
+          render={() =>
+            <SearchBooks
+              query={this.state.query}
+            />
+          }
         />
     </main>
   );
