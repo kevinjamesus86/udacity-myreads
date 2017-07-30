@@ -1,11 +1,17 @@
 .list-books {
-  margin: 0;
+  margin: -1rem 0 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 
-  &__item + &__item {
-    margin-left: 3rem;
+  &__item {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1),
+                0 5px 15px rgba(0, 0, 0, 0.07);
   }
 }
