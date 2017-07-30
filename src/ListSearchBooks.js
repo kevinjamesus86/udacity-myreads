@@ -1,40 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as BooksAPI from './BooksAPI';
 import ListBooks from './ListBooks';
 import './ListSearchBooks.css';
 
 export default class ListSearchBooks extends Component {
   static propTypes = {
-    query: PropTypes.string
+    query: PropTypes.string.isRequired,
+    books: PropTypes.array.isRequired,
   };
-  state = {
-    books: []
-  };
-  findBooks = query => {
-    if (query) {
-      BooksAPI.search(query, 15).then(books => {
-        this.setState({
-          books: books.error ? [] : books
-        });
-      });
-    } else {
-      this.setState({
-        books: []
-      });
-    }
-  };
-  componentDidMount() {
-    this.findBooks(this.props.query);
-  }
-  componentWillReceiveProps({query}) {
-    if (this.props.query !== query) {
-      this.findBooks(query);
-    }
-  }
   render() {
-    const {query} = this.props;
-    const {books} = this.state;
+    const { query, books } = this.props;
 
     let searchForContent;
     if (query) {

@@ -9,6 +9,7 @@ import * as BooksAPI from './BooksAPI';
 
 class BooksApp extends Component {
   state = {
+    searchBooks: [],
     books: [],
     query: '',
   };
@@ -17,27 +18,41 @@ class BooksApp extends Component {
       this.setState(state => ({ books }));
     });
   }
-  handleQueryChange = query => {
+  searchBooks = query => {
     this.setState({ query });
+    if (query) {
+      BooksAPI.search(query, 20).then(books => {
+        this.setState({
+          searchBooks: books.error ? [] : books,
+        });
+      });
+    } else {
+      this.setState({
+        searchBooks: []
+      });
+    }
   };
   render() {
-    const { books } = this.state;
+    const { books, searchBooks } = this.state;
     return (
       <main className="app">
         <SiteHeader
-          onQueryChange={this.handleQueryChange}
+          onQueryChange={this.searchBooks}
         />
         <Route
           exact
           path='/'
           render={() =>
-            <BookShelf books={books} />
+            <BookShelf
+              books={books}
+            />
           }
         />
         <Route
           path='/search'
           render={() =>
             <ListSearchBooks
+              books={searchBooks}
               query={this.state.query}
             />
           }
