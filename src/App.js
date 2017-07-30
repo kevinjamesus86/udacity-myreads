@@ -37,7 +37,7 @@ class BooksApp extends Component {
   onUpdateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       const books = this.state.books.slice(0);
-      const bookIndex = books.indexOf(book);
+      const bookIndex = books.findIndex(b => b.id === book.id);
       book.shelf = shelf;
       if (shelf === 'none' && ~bookIndex) {
         books.splice(bookIndex, 1);
