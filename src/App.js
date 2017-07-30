@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import SiteHeader from './SiteHeader';
@@ -60,31 +60,47 @@ class BooksApp extends Component {
   };
   render() {
     const { books, searchBooks } = this.state;
+
     return (
       <main className="app">
         <SiteHeader
           onQueryChange={this.searchBooks}
         />
-        <Route
-          exact
-          path='/'
-          render={() =>
-            <BookShelf
-              books={books}
-              onUpdateBook={this.onUpdateBook}
-            />
-          }
-        />
-        <Route
-          path='/search'
-          render={() =>
-            <ListSearchBooks
-              books={searchBooks}
-              query={this.state.query}
-              onUpdateBook={this.onUpdateBook}
-            />
-          }
-        />
+        <Switch>
+          <Route
+            exact
+            path='/'
+            render={() =>
+              <BookShelf
+                books={books}
+                onUpdateBook={this.onUpdateBook}
+              />
+            }
+          />
+          <Route
+            path='/search'
+            render={() =>
+              <ListSearchBooks
+                books={searchBooks}
+                query={this.state.query}
+                onUpdateBook={this.onUpdateBook}
+              />
+            }
+          />
+          <Route
+            path='/:shelf'
+            render={({ location }) => {
+              const filteredBooks = books.filter(book =>
+                book.shelf === location.state.shelf);
+              return (
+                <BookShelf
+                  books={filteredBooks}
+                  onUpdateBook={this.onUpdateBook}
+                />
+              );
+            }}
+          />
+        </Switch>
     </main>
   );
   }

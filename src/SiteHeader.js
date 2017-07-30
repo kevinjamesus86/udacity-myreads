@@ -27,27 +27,47 @@ export default class SiteHeader extends Component {
           <h1 className="header__logo">my reads</h1>
           <nav className="site-links">
             <NavLink
+              className="site-links__link"
               exact
-              to="/"
-              className="site-links__link">
+              to={{
+                pathname: '/',
+                state: {
+                  shelf: ''
+                }
+              }}>
               all
             </NavLink>
             <span className="site-links__link-divider"></span>
             <NavLink
-              to="/reading"
-              className="site-links__link">
+              className="site-links__link"
+              to={{
+                pathname: '/reading',
+                state: {
+                  shelf: 'currentlyReading'
+                }
+              }}>
               reading
             </NavLink>
             <span className="site-links__link-divider"></span>
             <NavLink
-              to="/want-to-read"
-              className="site-links__link">
+              className="site-links__link"
+              to={{
+                pathname: '/want-to-read',
+                state: {
+                  shelf: 'wantToRead'
+                }
+              }}>
               want to read
             </NavLink>
             <span className="site-links__link-divider"></span>
             <NavLink
-              to="/read"
-              className="site-links__link">
+              className="site-links__link"
+              to={{
+                pathname: '/read',
+                state: {
+                  shelf: 'read'
+                }
+              }}>
               read
             </NavLink>
           </nav>
