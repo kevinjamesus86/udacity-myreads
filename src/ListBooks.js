@@ -13,14 +13,11 @@ export default class ListBooks extends Component {
     const { books, onUpdateBook } = this.props;
     return (
       <ul className="list-books">
-        {books.map((book, index) =>
+        {books.map((book, index) => (
           <li key={`${book.id}.${index}`} className="list-books__item">
-            <Book
-              book={book}
-              onChange={onUpdateBook}
-            />
+            <Book book={book} onChange={onUpdateBook} />
           </li>
-        )}
+        ))}
       </ul>
     );
   }

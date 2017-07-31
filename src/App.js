@@ -30,7 +30,7 @@ class BooksApp extends Component {
       });
     } else {
       this.setState({
-        searchBooks: []
+        searchBooks: [],
       });
     }
   };
@@ -67,83 +67,90 @@ class BooksApp extends Component {
     });
   };
   groupBooksForBookshelf = (books, filter) => {
-    const booksByShelf = books.reduce((byShelf, book) => {
-      byShelf[book.shelf].push(book);
-      return byShelf;
-    }, {
-      currentlyReading: [],
-      wantToRead: [],
-      read: [],
-    });
+    const booksByShelf = books.reduce(
+      (byShelf, book) => {
+        byShelf[book.shelf].push(book);
+        return byShelf;
+      },
+      {
+        currentlyReading: [],
+        wantToRead: [],
+        read: [],
+      }
+    );
 
-    const shelves = [{
-      label: 'Reading',
-      books: booksByShelf.currentlyReading,
-      sansBooksMessage: 'Go find a book'
-    }, {
-      label: 'Want to read',
-      books: booksByShelf.wantToRead,
-      sansBooksMessage: 'Really? Nothing?'
-    }, {
-      label: 'Read',
-      books: booksByShelf.read,
-      sansBooksMessage: 'Come on now...'
-    }];
+    const shelves = [
+      {
+        label: 'Reading',
+        books: booksByShelf.currentlyReading,
+        sansBooksMessage: 'Go find a book',
+      },
+      {
+        label: 'Want to read',
+        books: booksByShelf.wantToRead,
+        sansBooksMessage: 'Really? Nothing?',
+      },
+      {
+        label: 'Read',
+        books: booksByShelf.read,
+        sansBooksMessage: 'Come on now...',
+      },
+    ];
 
-    return filter ?
-      shelves.splice({
-        currentlyReading: 0,
-        wantToRead: 1,
-        read: 2,
-      }[filter], 1) :
-      shelves;
+    return filter
+      ? shelves.splice(
+          {
+            currentlyReading: 0,
+            wantToRead: 1,
+            read: 2,
+          }[filter],
+          1
+        )
+      : shelves;
   };
   render() {
     const { books, searchBooks } = this.state;
 
     return (
       <main className="app">
-        <SiteHeader
-          onQueryChange={this.searchBooks}
-        />
+        <SiteHeader onQueryChange={this.searchBooks} />
         <Switch>
           <Route
             exact
-            path='/'
-            render={() =>
+            path="/"
+            render={() => (
               <BookShelf
                 shelves={this.groupBooksForBookshelf(books)}
                 onUpdateBook={this.onUpdateBook}
               />
-            }
+            )}
           />
           <Route
-            path='/search'
-            render={() =>
+            path="/search"
+            render={() => (
               <ListSearchBooks
                 books={searchBooks}
                 query={this.state.query}
                 onUpdateBook={this.onUpdateBook}
               />
-            }
+            )}
           />
           <Route
-            path='/:shelf'
+            path="/:shelf"
             render={route => {
-              const shelves = this.groupBooksForBookshelf(books,
-                route.location.state.shelf);
+              const shelves = this.groupBooksForBookshelf(
+                books,
+                route.location.state.shelf
+              );
               return (
-                <BookShelf
-                  shelves={shelves}
-                  onUpdateBook={this.onUpdateBook}
-                />
+                <BookShelf shelves={shelves} onUpdateBook={this.onUpdateBook} />
               );
             }}
           />
         </Switch>
-    </main>
-  );
+      </main>
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;

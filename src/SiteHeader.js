@@ -25,53 +25,48 @@ export default class SiteHeader extends Component {
   }
   render() {
     return (
-      <header ref={el => this.header = el} className="header">
+      <header ref={el => (this.header = el)} className="header">
         <div className="header-inner">
           <h1 className="header__logo">my reads</h1>
           <nav className="site-links">
-            <NavLink
-              exact
-              to="/"
-              className="site-links__link">
+            <NavLink exact to="/" className="site-links__link">
               all
             </NavLink>
-            <span className="site-links__link-divider"></span>
+            <span className="site-links__link-divider" />
             <NavLink
               className="site-links__link"
               to={{
                 pathname: '/reading',
                 state: {
-                  shelf: 'currentlyReading'
-                }
+                  shelf: 'currentlyReading',
+                },
               }}>
               reading
             </NavLink>
-            <span className="site-links__link-divider"></span>
+            <span className="site-links__link-divider" />
             <NavLink
               className="site-links__link"
               to={{
                 pathname: '/want-to-read',
                 state: {
-                  shelf: 'wantToRead'
-                }
+                  shelf: 'wantToRead',
+                },
               }}>
               want to read
             </NavLink>
-            <span className="site-links__link-divider"></span>
+            <span className="site-links__link-divider" />
             <NavLink
               className="site-links__link"
               to={{
                 pathname: '/read',
                 state: {
-                  shelf: 'read'
-                }
+                  shelf: 'read',
+                },
               }}>
               read
             </NavLink>
           </nav>
-          <Link
-            to="/search"
-            className="search-container">
+          <Link to="/search" className="search-container">
             <input
               type="search"
               className="search-input"

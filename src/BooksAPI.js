@@ -1,6 +1,5 @@
 const api = `https://reactnd-books-api.udacity.com`;
 
-
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token;
 if (!token) {
@@ -8,34 +7,34 @@ if (!token) {
 }
 
 const headers = {
-  'Accept': 'application/json',
-  'Authorization': token,
+  Accept: 'application/json',
+  Authorization: token,
 };
 
 export const get = bookId =>
   fetch(`${api}/books/${bookId}`, {
-    headers
+    headers,
   })
-  .then(res => res.json())
-  .then(data => data.book);
+    .then(res => res.json())
+    .then(data => data.book);
 
 export const getAll = () =>
   fetch(`${api}/books`, {
-    headers
+    headers,
   })
-  .then(res => res.json())
-  .then(data => data.books);
+    .then(res => res.json())
+    .then(data => data.books);
 
 export const update = (book, shelf) =>
   fetch(`${api}/books/${book.id}`, {
     method: 'PUT',
     headers: {
       ...headers,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      shelf
-    })
+      shelf,
+    }),
   }).then(res => res.json());
 
 export const search = (query, maxResults) =>
@@ -43,11 +42,12 @@ export const search = (query, maxResults) =>
     method: 'POST',
     headers: {
       ...headers,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       query,
-      maxResults
-    })
-  }).then(res => res.json())
-  .then(data => data.books);
+      maxResults,
+    }),
+  })
+    .then(res => res.json())
+    .then(data => data.books);

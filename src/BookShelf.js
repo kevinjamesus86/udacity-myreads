@@ -12,24 +12,18 @@ export default class BookShelf extends Component {
   render() {
     const { shelves, onUpdateBook } = this.props;
 
-    function listBooksOrElse({
-      books,
-      message
-    }) {
-      return books.length ?
-        <ListBooks
-          books={books}
-          onUpdateBook={onUpdateBook}
-        /> :
-        <div className="bookshelf-alt">
-          {message}
-        </div>;
+    function listBooksOrElse({ books, message }) {
+      return books.length
+        ? <ListBooks books={books} onUpdateBook={onUpdateBook} />
+        : <div className="bookshelf-alt">
+            {message}
+          </div>;
     }
 
     return (
       <section className="bookshelf">
         <section className="bookshelf__shelf">
-          {shelves.map((shelf, index) =>
+          {shelves.map((shelf, index) => (
             <div key={index}>
               <h2 className="bookshelf__heading">
                 {shelf.label}
@@ -39,7 +33,7 @@ export default class BookShelf extends Component {
                 message: shelf.sansBooksMessage,
               })}
             </div>
-          )}
+          ))}
         </section>
       </section>
     );

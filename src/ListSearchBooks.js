@@ -16,7 +16,13 @@ export default class ListSearchBooks extends Component {
     if (query) {
       searchForContent = (
         <span className="has-input">
-          Showing <strong>{books.length}</strong> results for <strong>"{query}"</strong>
+          Showing
+          {' '}
+          <strong>{books.length}</strong>
+          {' '}
+          results for
+          {' '}
+          <strong>"{query}"</strong>
         </span>
       );
     } else {
@@ -37,10 +43,7 @@ export default class ListSearchBooks extends Component {
         <div className="list-search-books__heading">
           {searchForContent}
         </div>
-        <ListBooks
-          books={books}
-          onUpdateBook={onUpdateBook}
-        />
+        <ListBooks books={books} onUpdateBook={onUpdateBook} />
       </section>
     );
   }

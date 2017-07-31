@@ -16,13 +16,12 @@ export default class Book extends Component {
     return (
       <div className="book">
         <div className="book__image-container">
-          {book.imageLinks && (
+          {book.imageLinks &&
             <img
               className="book__image"
               src={book.imageLinks.smallThumbnail}
               alt={book.title}
-            />
-          )}
+            />}
         </div>
         <h3 className="book__title">
           {book.title}
