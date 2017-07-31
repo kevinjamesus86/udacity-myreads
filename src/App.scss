@@ -1,4 +1,11 @@
-// 1. Height of the full-sized header
+// 1. Height of header on mobile
 .app {
-  padding-top: 128px; // 1
+  padding-top: 156px; // 1
+}
+
+@media (min-width: 741px) {
+  // 1. Height of header on > mobile
+  .app {
+    padding-top: 128px; // 1
+  }
 }

@@ -1,6 +1,6 @@
 .header {
   width: 100%;
-  padding: 3rem 0;
+  padding: 1rem 0;
   background: linear-gradient(135deg, #ec356e, #ce3276, #7131a7);
   box-shadow: 0 15px 45px rgba(50, 50, 93, 0.15),
               0 5px 15px rgba(0, 0, 0, 0.07);
@@ -20,12 +20,13 @@
     max-width: 92vw;
     display: flex;
     align-items: center;
+    flex-direction: column;
   }
 
   &__logo {
     margin: 0;
     color: #fff;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     transform: translateY(-2px);
 
     &::before {
@@ -42,8 +43,22 @@
   }
 }
 
+@media (min-width: 741px) {
+  .header {
+    padding: 3rem 0;
+
+    &-inner {
+      flex-direction: row;
+    }
+
+    &__logo {
+      font-size: 1.7rem;
+    }
+  }
+}
+
 .site-links {
-  margin: 0 3rem;
+  margin: 0.8rem 0 1.2rem;
 
   &__link {
     color: #fff;
@@ -84,6 +99,12 @@
   }
 }
 
+@media (min-width: 741px) {
+  .site-links {
+    margin: 0 3rem;
+  }
+}
+
 .search-container,
 .search-input {
   &,
@@ -93,6 +114,7 @@
 }
 
 .search-container {
+  width: 100%;
   text-decoration: none;
   display: flex;
   flex: 1;

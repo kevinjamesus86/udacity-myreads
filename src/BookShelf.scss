@@ -17,13 +17,25 @@
   }
 
   &__shelf {
-    margin: 5rem 0;
+    margin: 3rem 0;
   }
 
   &__heading {
-    margin: 5rem 0;
-    font-size: 1.7rem;
+    margin: 3rem 0;
+    font-size: 1.5rem;
     font-weight: 400;
     text-align: center;
+  }
+}
+
+@media (min-width: 741px) {
+  .bookshelf {
+    &__shelf {
+      margin: 5rem 0;
+    }
+
+    &__heading {
+      margin: 5rem 0;
+    }
   }
 }
