@@ -5,7 +5,7 @@ import './App.css';
 import SiteHeader from './SiteHeader';
 import BookShelf from './BookShelf';
 import ListSearchBooks from './ListSearchBooks';
-import * as BooksAPI from './BooksAPI';
+import * as BooksAPI from './util/BooksAPI';
 
 class BooksApp extends Component {
   state = {
