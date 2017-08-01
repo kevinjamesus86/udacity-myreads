@@ -4,16 +4,6 @@
   background: linear-gradient(135deg, #ec356e, #ce3276, #7131a7);
   box-shadow: 0 15px 45px rgba(50, 50, 93, 0.15),
               0 5px 15px rgba(0, 0, 0, 0.07);
-  transition: padding 0.3s ease;
-  will-change: padding;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-
-  &.smoosh {
-    padding: 1rem 0;
-  }
 
   &-inner {
     margin: auto;
@@ -46,6 +36,16 @@
 @media (min-width: 741px) {
   .header {
     padding: 3rem 0;
+    transition: padding 0.3s ease;
+    will-change: padding;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    &.smoosh {
+      padding: 1rem 0;
+    }
 
     &-inner {
       flex-direction: row;
