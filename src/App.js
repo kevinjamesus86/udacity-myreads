@@ -6,7 +6,7 @@ import SiteHeader from './SiteHeader';
 import BookShelf from './BookShelf';
 import ListSearchBooks from './ListSearchBooks';
 import * as BooksAPI from './util/BooksAPI';
-import { after } from './util/async.after';
+import * as asyncFns from './util/async';
 
 class BooksApp extends Component {
   state = {
@@ -23,12 +23,12 @@ class BooksApp extends Component {
     this.setState({ query });
     if (query) {
       // One search at a time
-      clearTimeout(this.pendingSearch);
-      this.pendingSearch = after(250, () => {
+      asyncFns.cancel(this.pendingSearch);
+      this.pendingSearch = asyncFns.after(250, () => {
         BooksAPI.search(this.state.query, 20).then(books => {
           const searchBooks = books.items || [];
           this.setState({
-            searchBooks
+            searchBooks,
           });
         });
       });
@@ -112,22 +112,20 @@ class BooksApp extends Component {
           <Route
             exact
             path="/"
-            render={() => (
+            render={() =>
               <BookShelf
                 shelves={this.groupBooksForBookshelf(books)}
                 onUpdateBook={this.onUpdateBook}
-              />
-            )}
+              />}
           />
           <Route
             path="/search"
-            render={() => (
+            render={() =>
               <ListSearchBooks
                 books={searchBooks}
                 query={this.state.query}
                 onUpdateBook={this.onUpdateBook}
-              />
-            )}
+              />}
           />
           <Route
             path="/:shelf"
