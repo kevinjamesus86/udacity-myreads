@@ -1,27 +1,31 @@
+/**
+ * Run a function after some time has passed
+ * @param {number} ms - Number of miliseconds to wait before executing `fn`
+ * @param {function} f - Function to run after `ms` milliseconds have elapsed
+ */
 export const after = (ms, ...rest) => {
-  let resolve, reject;
-  const promise = new Promise((_resolve, _reject) => {
-    resolve = _resolve;
-    reject = _reject;
-  });
-  const timeoutId = setTimeout(
-    f => {
-      try {
-        const r = f();
-        resolve(r);
-      } catch (error) {
-        reject(error);
-      }
-    },
-    ms,
-    ...rest
+  let timeoutId;
+  return Object.assign(
+    new Promise((resolve, reject) => {
+      timeoutId = setTimeout(
+        f => {
+          try {
+            resolve(f());
+          } catch (error) {
+            reject(error);
+          }
+        },
+        ms,
+        ...rest
+      );
+    }),
+    {
+      cancel() {
+        clearTimeout(timeoutId);
+      },
+      toString() {
+        return timeoutId;
+      },
+    }
   );
-  return Object.assign(promise, {
-    cancel() {
-      clearTimeout(timeoutId);
-    },
-    toString() {
-      return timeoutId;
-    },
-  });
 };
