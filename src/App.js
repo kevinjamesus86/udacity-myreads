@@ -6,6 +6,7 @@ import SiteHeader from './SiteHeader';
 import BookShelf from './BookShelf';
 import ListSearchBooks from './ListSearchBooks';
 import * as BooksAPI from './util/BooksAPI';
+import { after } from './util/async.after';
 
 class BooksApp extends Component {
   state = {
@@ -15,17 +16,20 @@ class BooksApp extends Component {
   };
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      this.setBooks(books);
+      this.setState({ books });
     });
   }
   searchBooks = query => {
     this.setState({ query });
     if (query) {
-      BooksAPI.search(query, 20).then(books => {
-        books = books.error ? [] : books;
-        this.updateShelvesToMatchOwnBooks(books);
-        this.setState({
-          searchBooks: books,
+      // One search at a time
+      clearTimeout(this.pendingSearch);
+      this.pendingSearch = after(250, () => {
+        BooksAPI.search(this.state.query, 20).then(books => {
+          const searchBooks = books.items || [];
+          this.setState({
+            searchBooks
+          });
         });
       });
     } else {
@@ -37,7 +41,7 @@ class BooksApp extends Component {
   onUpdateBook = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       const books = this.state.books.slice(0);
-      const bookIndex = books.findIndex(b => b.id === book.id);
+      const bookIndex = books.findIndex(b => b._id === book._id);
       const originalBook = book;
 
       // If we have this on a shelf grab it, otherwise
@@ -53,17 +57,7 @@ class BooksApp extends Component {
         books.push(book);
       }
 
-      this.setBooks(books);
-    });
-  };
-  setBooks = books => {
-    const entries = books.map(book => [book.id, book.shelf]);
-    this.bookIdsToShelves = new Map(entries);
-    this.setState({ books });
-  };
-  updateShelvesToMatchOwnBooks = books => {
-    books.forEach(book => {
-      book.shelf = this.bookIdsToShelves.get(book.id) || 'none';
+      this.setState({ books });
     });
   };
   groupBooksForBookshelf = (books, filter) => {

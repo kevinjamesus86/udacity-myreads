@@ -1,9 +1,10 @@
-const api = `https://reactnd-books-api.udacity.com`;
+const api = `https://udacity-myreads-server.herokuapp.com/api`;
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token;
 if (!token) {
-  token = localStorage.token = Math.random().toString(36).substr(-8);
+  token = localStorage.token =
+    `token.` + Date.now().toString(32) + Math.random().toString(32);
 }
 
 const headers = {
@@ -12,22 +13,16 @@ const headers = {
 };
 
 export const get = bookId =>
-  fetch(`${api}/books/${bookId}`, {
-    headers,
-  })
-    .then(res => res.json())
-    .then(data => data.book);
+  fetch(`${api}/books/${bookId}`).then(res => res.json());
 
 export const getAll = () =>
-  fetch(`${api}/books`, {
+  fetch(`${api}/shelved-books`, {
     headers,
-  })
-    .then(res => res.json())
-    .then(data => data.books);
+  }).then(res => res.json());
 
 export const update = (book, shelf) =>
-  fetch(`${api}/books/${book.id}`, {
-    method: 'PUT',
+  fetch(`${api}/shelved-books/${book._id}`, {
+    method: 'PATCH',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
@@ -37,17 +32,11 @@ export const update = (book, shelf) =>
     }),
   }).then(res => res.json());
 
-export const search = (query, maxResults) =>
-  fetch(`${api}/search`, {
-    method: 'POST',
+export const search = (query, limit = 20) =>
+  fetch(`${api}/books/search?query=${query}&limit=${limit}`, {
+    method: 'GET',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      query,
-      maxResults,
-    }),
-  })
-    .then(res => res.json())
-    .then(data => data.books);
+  }).then(res => res.json());

@@ -14,7 +14,7 @@ export default class ListBooks extends Component {
     return (
       <ul className="list-books">
         {books.map((book, index) => (
-          <li key={`${book.id}.${index}`} className="list-books__item">
+          <li key={book._id} className="list-books__item">
             <Book book={book} onChange={onUpdateBook} />
           </li>
         ))}
