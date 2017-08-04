@@ -22,17 +22,21 @@ class BooksApp extends Component {
   }
   searchBooks = query => {
     const hasQuery = !!query;
+
     this.setState({
       searchPending: hasQuery,
       searchBooks: [],
       query,
     });
+
+    // One search at a time
+    asyncFns.cancel(this.pendingSearch);
+
     if (hasQuery) {
-      // One search at a time
-      asyncFns.cancel(this.pendingSearch);
       this.pendingSearch = asyncFns.after(500, () => {
         BooksAPI.search(this.state.query, 20).then(books => {
           const searchBooks = books.items || [];
+          this.pendingSearch = null;
           this.setState({
             searchPending: false,
             searchBooks,
