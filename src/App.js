@@ -64,7 +64,13 @@ class BooksApp extends Component {
         books.push(book);
       }
 
-      this.setState({ books });
+      this.setState(state => ({
+        books,
+        searchBooks: state.searchBooks.map(searchBook => ({
+          ...searchBook,
+          shelf: searchBook._id === book._id ? shelf : searchBook.shelf,
+        })),
+      }));
     });
   };
   groupBooksForBookshelf = (books, filter) => {
