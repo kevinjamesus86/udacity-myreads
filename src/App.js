@@ -10,6 +10,7 @@ import * as asyncFns from './util/async';
 
 class BooksApp extends Component {
   state = {
+    searchPending: false,
     searchBooks: [],
     books: [],
     query: '',
@@ -20,21 +21,23 @@ class BooksApp extends Component {
     });
   }
   searchBooks = query => {
-    this.setState({ query });
-    if (query) {
+    const hasQuery = !!query;
+    this.setState({
+      searchPending: hasQuery,
+      searchBooks: [],
+      query,
+    });
+    if (hasQuery) {
       // One search at a time
       asyncFns.cancel(this.pendingSearch);
-      this.pendingSearch = asyncFns.after(250, () => {
+      this.pendingSearch = asyncFns.after(500, () => {
         BooksAPI.search(this.state.query, 20).then(books => {
           const searchBooks = books.items || [];
           this.setState({
+            searchPending: false,
             searchBooks,
           });
         });
-      });
-    } else {
-      this.setState({
-        searchBooks: [],
       });
     }
   };
@@ -124,6 +127,7 @@ class BooksApp extends Component {
               <ListSearchBooks
                 books={searchBooks}
                 query={this.state.query}
+                searchPending={this.state.searchPending}
                 onUpdateBook={this.onUpdateBook}
               />}
           />

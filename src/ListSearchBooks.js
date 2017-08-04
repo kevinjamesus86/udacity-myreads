@@ -8,12 +8,19 @@ export default class ListSearchBooks extends Component {
     query: PropTypes.string.isRequired,
     books: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired,
+    searchPending: PropTypes.bool,
   };
   render() {
-    const { query, books, onUpdateBook } = this.props;
+    const { query, books, onUpdateBook, searchPending } = this.props;
 
     let searchForContent;
-    if (query) {
+    if (searchPending) {
+      searchForContent = (
+        <span className="no-input">
+          Snagging results for <strong>"{query}"</strong> ...
+        </span>
+      );
+    } else if (query) {
       searchForContent = (
         <span className="has-input">
           Showing
@@ -43,7 +50,8 @@ export default class ListSearchBooks extends Component {
         <div className="list-search-books__heading">
           {searchForContent}
         </div>
-        <ListBooks books={books} onUpdateBook={onUpdateBook} />
+        {!searchPending &&
+          <ListBooks books={books} onUpdateBook={onUpdateBook} />}
       </section>
     );
   }
