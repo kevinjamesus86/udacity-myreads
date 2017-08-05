@@ -1,4 +1,4 @@
-const api = `https://udacity-reactnd-server.herokuapp.com/api`;
+const api = `https://udacity-reactnd-server.herokuapp.com/api/myreads`;
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token;
